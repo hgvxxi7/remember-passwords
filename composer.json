@@ -1,0 +1,23 @@
+{
+  "config": {
+    "bin-dir": "bin/"
+  },
+  "name": "newage/remember-passwords",
+  "description": "Site for remembering passwords",
+  "license": "MIT",
+  "keywords": [
+    "passwords"
+  ],
+  "require": {
+    "php": ">=5.5",
+    "silex/silex": "~1.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "PasswordManager": "src/"
+    }
+  }
+}
