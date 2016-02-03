@@ -13,6 +13,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->get("/", "PasswordManager\\Controller\\IndexController::indexAction");
+$app->get("/registration", "PasswordManager\\Controller\\UserController::registrationAction");
 
 $app['debug'] = true;
 $app->run();
