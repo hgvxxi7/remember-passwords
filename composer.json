@@ -3,7 +3,7 @@
     "bin-dir": "bin/"
   },
   "name": "newage/remember-passwords",
-  "description": "Site for remembering passwords",
+  "description": "Site for remembering passwords uses SILEX framework",
   "license": "MIT",
   "keywords": [
     "passwords"
@@ -15,7 +15,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "4.8.*",
-    "squizlabs/php_codesniffer": "1.5.*",
+    "squizlabs/php_codesniffer": "^2.3",
     "phpmd/phpmd": "2.1.*"
   },
   "autoload": {
@@ -24,6 +24,8 @@
     }
   },
   "scripts": {
+    "cs": "php bin/phpcs src --standard=PSR2 --colors",
+    "cs-fix": "php bin/phpcbf src --standard=PSR2 --colors",
     "server": "php -S localhost:8000 -t public public/index.php"
   }
 }
