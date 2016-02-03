@@ -1,2 +1,8 @@
-Title: {{ title|e }}
-Description: {{ description|e }}
+{% extends "template/basic.twig" %}
+
+{% block title %}Registration{% endblock %}
+{% block breadcrumb %}
+    <li class="active">Registration</li>
+{% endblock %}
+
+{% block content %}<h1>{{ title }}</h1>{% endblock %}

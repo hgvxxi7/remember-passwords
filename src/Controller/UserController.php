@@ -10,8 +10,7 @@ class UserController
     public function registrationAction(Request $request, Application $app)
     {
         return $app['twig']->render('registration.twig', array(
-            'title' => 'Registration',
-            'description' => 'User registration page'
+            'title' => 'Registration form'
         ));
     }
 }
