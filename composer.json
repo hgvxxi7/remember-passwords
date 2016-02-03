@@ -22,5 +22,8 @@
     "psr-4": {
       "PasswordManager\\": "src/"
     }
+  },
+  "scripts": {
+    "server": "php -S localhost:8000 -t public public/index.php"
   }
 }
