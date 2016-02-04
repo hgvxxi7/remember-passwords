@@ -5,5 +5,6 @@ return [
     'language' => 'Language',
     'russian' => 'Russian',
     'english' => 'English',
-    'home' => 'Home'
+    'home' => 'Home',
+    'registration' => 'Registration'
 ];
