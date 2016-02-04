@@ -1,5 +1,9 @@
 <?php
 
 return [
-    'registration' => 'регистрация'
+    'project' => 'Просто-Пароль',
+    'language' => 'Язык',
+    'russian' => 'Русский',
+    'english' => 'Английский',
+    'home' => 'Домой'
 ];

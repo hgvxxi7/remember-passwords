@@ -20,11 +20,13 @@ $app->extend('translator', function (\Silex\Translator $translator, $app) {
     $translator->addResource('array', 'data/translation/en.php', 'en');
     return $translator;
 });
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->get('/{_locale}', 'PasswordManager\\Controller\\IndexController::indexAction')
-    ->value('_locale', 'en');
+    ->value('_locale', 'en')
+    ->bind('home');
 $app->get('/{_locale}/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
-    ->value('{_locale}', 'en');
+    ->bind('registration');
 
 $app['debug'] = true;
 $app->run();
