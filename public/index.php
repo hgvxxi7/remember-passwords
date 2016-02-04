@@ -1,6 +1,6 @@
 <?php
 
-/* Change directory to project home */
+/* Change directory to project folder */
 chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
@@ -11,19 +11,20 @@ if (php_sapi_name() === 'cli-server' && is_file($filename)) {
 
 $app = new Silex\Application();
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__ . '/../src/view'
+    'twig.path' => 'src/view'
 ));
-
-$app->get("/", "PasswordManager\\Controller\\IndexController::indexAction");
-$app->get("/{_locale}/registration", "PasswordManager\\Controller\\UserController::registrationAction");
-$app->get("/registration", "PasswordManager\\Controller\\UserController::registrationAction")
-    ->value('_locale', 'ru');
-
 $app->register(new \Silex\Provider\TranslationServiceProvider());
 $app->extend('translator', function (\Silex\Translator $translator, $app) {
     $translator->addLoader('array', new \Symfony\Component\Translation\Loader\PhpFileLoader());
     $translator->addResource('array', 'data/translation/ru.php', 'ru');
+    $translator->addResource('array', 'data/translation/en.php', 'en');
     return $translator;
 });
+
+$app->get('/{_locale}', 'PasswordManager\\Controller\\IndexController::indexAction')
+    ->value('_locale', 'en');
+$app->get('/{_locale}/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
+    ->value('{_locale}', 'en');
+
 $app['debug'] = true;
 $app->run();
