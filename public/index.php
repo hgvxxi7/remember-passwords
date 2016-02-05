@@ -1,6 +1,6 @@
 <?php
 
-/* Change directory to project folder */
+/* Изменение директории на корень проекта, теперь все пути можно писать от корня проекта */
 chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
