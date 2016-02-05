@@ -3,7 +3,7 @@
 {% block title %}Welcome{% endblock %}
 
 {% block jumbotron %}
-    <h1>{{ title|trans }}</h1>
+    <h1>{{ title|e }}</h1>
     <p>{{ description|e }}</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
 {% endblock %}

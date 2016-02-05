@@ -6,20 +6,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ path('home') }}">{{ 'project'|trans }}</a>
+              <a class="navbar-brand" href="{{ path('home') }}">Project Name</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('home') }}">{{ 'home'|trans }}</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'language'|trans }} <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{ path('home', {'_locale': 'ru'}) }}">{{ 'russian'|trans }}</a></li>
-                    <li><a href="{{ path('home', {'_locale': 'en'}) }}">{{ 'english'|trans }}</a></li>
-                  </ul>
-                </li>
+                <li class="active"><a href="{{ path('home') }}">Home</a></li>
               </ul>
             </div>
           </div>

@@ -10,22 +10,26 @@ if (php_sapi_name() === 'cli-server' && is_file($filename)) {
 }
 
 $app = new Silex\Application();
+/**
+ * Регистрация twig template engine
+ * @see http://silex.sensiolabs.org/doc/providers/twig.html
+ */
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => 'src/view'
 ));
-$app->register(new \Silex\Provider\TranslationServiceProvider());
-$app->extend('translator', function (\Silex\Translator $translator, $app) {
-    $translator->addLoader('array', new \Symfony\Component\Translation\Loader\PhpFileLoader());
-    $translator->addResource('array', 'data/translation/ru.php', 'ru');
-    $translator->addResource('array', 'data/translation/en.php', 'en');
-    return $translator;
-});
+/**
+ * Регистрация ulr провайдера
+ * @see http://silex.sensiolabs.org/doc/providers/url_generator.html
+ */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
-$app->get('/{_locale}', 'PasswordManager\\Controller\\IndexController::indexAction')
-    ->value('_locale', 'en')
+/**
+ * Регистрация роутов
+ * @see http://silex.sensiolabs.org/doc/usage.html#routing
+ */
+$app->get('/', 'PasswordManager\\Controller\\IndexController::indexAction')
     ->bind('home');
-$app->get('/{_locale}/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
+$app->get('/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
     ->bind('registration');
 
 $app['debug'] = true;
