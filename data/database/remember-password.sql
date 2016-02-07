@@ -1,0 +1,9 @@
+CREATE DATABASE `remember-password`;
+
+CREATE TABLE `users` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `salt` VARCHAR(32) NOT NULL,
+  `dt_created` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));

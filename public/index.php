@@ -22,6 +22,17 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
  * @see http://silex.sensiolabs.org/doc/providers/url_generator.html
  */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+/**
+ * Регистрация одного экземпляра PDO
+ * @see http://php.net/manual/en/class.pdo.php
+ */
+$app['pdo'] = $app->share(function () use ($app) {
+    return new PDO(
+        'mysql:host=localhost;dbname=remember-password',
+        'root',
+        '123456'
+    );
+});
 
 /**
  * Регистрация роутов
@@ -32,5 +43,4 @@ $app->get('/', 'PasswordManager\\Controller\\IndexController::indexAction')
 $app->get('/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
     ->bind('registration');
 
-$app['debug'] = true;
 $app->run();
