@@ -43,5 +43,7 @@ $app->get('/', 'PasswordManager\\Controller\\IndexController::indexAction')
 $app->get('/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
     ->bind('registration');
 $app->post('/registration', 'PasswordManager\\Controller\\UserController::registrationAction');
+$app->get('/login', 'PasswordManager\\Controller\\UserController::loginAction')
+    ->bind('login');
 
 $app->run();

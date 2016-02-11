@@ -11,8 +11,8 @@ class IndexController
     public function indexAction(Request $request, Application $app)
     {
         return $app['twig']->render('index.twig', array(
-            'title' => 'Hello world',
-            'description' => 'We use TWIG templates'
+            'title' => 'Password Manager',
+            'description' => 'Easy to remember, Easy to use, Impossible to hack'
         ));
     }
 }
