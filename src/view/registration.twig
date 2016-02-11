@@ -1,4 +1,4 @@
-{# Подключаем основной темплит #}
+{# Подключаем основной темплит http://twig.sensiolabs.org/doc/templates.html#template-inheritance #}
 {% extends "template/basic.twig" %}
 
 {# В блок title добавляем значение #}
@@ -13,7 +13,7 @@
     {# Выводим переменную title #}
     <h1>{{ title }}</h1>
     <hr/>
-    {# Выводи див на 4 колонки http://getbootstrap.com/css/#grid #}
+    {# Выводим див на 4 колонки http://getbootstrap.com/css/#grid #}
     <div class="row">
         <div class="col-md-4">
             {# Условный оператор if http://twig.sensiolabs.org/doc/tags/if.html #}
