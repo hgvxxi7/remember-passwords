@@ -45,5 +45,11 @@ $app->get('/registration', 'PasswordManager\\Controller\\UserController::registr
 $app->post('/registration', 'PasswordManager\\Controller\\UserController::registrationAction');
 $app->get('/login', 'PasswordManager\\Controller\\UserController::loginAction')
     ->bind('login');
+$app->get('/users', 'PasswordManager\\Controller\\UserController::usersAction')
+    ->bind('users');
 
+/**
+ * Включает дебаг режим, для отображения информации об ошибках
+ */
+$app['debug'] = true;
 $app->run();
