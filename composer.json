@@ -26,7 +26,6 @@
   "scripts": {
     "cs": "php bin/phpcs src --standard=PSR2 --colors",
     "cs-fix": "php bin/phpcbf src --standard=PSR2 --colors",
-    "server": "php -S localhost:8000 -t public public/index.php --dev",
-    "server:8080": "php -S localhost:8080 -t public public/index.php --dev"
+    "server": "php -S localhost:8000 -t public public/index.php --dev"
   }
 }

@@ -1,0 +1,37 @@
+{# Подключаем основной темплит http://twig.sensiolabs.org/doc/templates.html#template-inheritance #}
+{% extends "template/basic.twig" %}
+
+{# В блок title добавляем значение #}
+{% block title %}User{% endblock %}
+{# В блок breadcrumbs добавляем значение #}
+{% block breadcrumb %}
+    <li class="active">User</li>
+{% endblock %}
+
+{# В блок content добавляем значение #}
+{% block content %}
+    <h1>User #{{ id }}</h1>
+    <hr/>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Salt</th>
+                <th>Registration Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>{{ id }}</th>
+                <th>{{ login|e }}</th>
+                <th>{{ password }}</th>
+                <th>{{ salt }}</th>
+                <th>{{ dt_created }}</th>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -58,4 +58,36 @@ class UserController
         /* Нужно выводить данные во вью */
         var_dump($result); die;
     }
+
+    /**
+     * Получение данных для указанного юзера
+     * @param Request $request
+     * @param Application $app
+     */
+    public function userAction(Request $request, Application $app)
+    {
+        /* @var $pdo \PDO */
+        $pdo = $app['pdo'];
+
+        /* SELECT запрос с простым условием id=:id. */
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
+        /* Подставляем переменную id из GET параметров */
+        $stmt->bindParam(':id', $request->get('id'));
+        /* Выполнение Sql запроса */
+        $stmt->execute();
+        /* Получение 1го результата от mysql после выполнения SELECT */
+        $result = $stmt->fetch();
+
+        /* Передача данных во вью */
+        return $app['twig']->render(
+            'user.twig',
+            [
+                'id' => $result['id'],
+                'login' => $result['login'],
+                'password' => $result['password'],
+                'salt' => $result['salt'],
+                'dt_created' => $result['dt_created']
+            ]
+        );
+    }
 }
