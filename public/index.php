@@ -39,6 +39,7 @@ $app['pdo'] = $app->share(function () use ($app) {
  * @see http://silex.sensiolabs.org/doc/usage.html#routing
  */
 $app->get('/', 'PasswordManager\\Controller\\IndexController::indexAction')
+/* bind привязывает уникальное имя к роуту. Чтобы данный роут можно вызвать из view по имени home. */
     ->bind('home');
 /* GET метод для формы регистрации. получение формы */
 $app->get('/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
