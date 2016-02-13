@@ -23,7 +23,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
  */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 /**
- * Регистрация одного экземпляра PDO для работы с БД
+ * Создание PDO объекта для работы с нашей БД
  * @see http://php.net/manual/en/class.pdo.php
  * Также здесь используется замыкание/анонимная функция- функция без имени
  * @see http://php.net/manual/en/functions.anonymous.php

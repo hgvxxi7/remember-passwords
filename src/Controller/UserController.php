@@ -41,16 +41,16 @@ class UserController
 
     public function loginAction(Request $request, Application $app)
     {
-
+        /* Добавить запрос SELECT. В запросе изменить условие на login = :login AND password = :password */
     }
 
     public function usersAction(Request $request, Application $app)
     {
         /* @var $pdo \PDO */
         $pdo = $app['pdo'];
-        /* SELECT запрос с простым условием 1=1. Условие нужно изменить. На login = :login AND password = :password */
+        /* SELECT запрос. */
         /* Сверять пароль нужно закодированный по условию которое описанно в методе регистрации */
-        $stmt = $pdo->prepare('SELECT * FROM users WHERE 1 = 1');
+        $stmt = $pdo->prepare('SELECT * FROM users');
         $stmt->execute();
         /* Получение результатов от mysql после выполнения SELECT */
         $result = $stmt->fetchAll();
