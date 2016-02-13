@@ -23,10 +23,14 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
  */
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 /**
- * Регистрация одного экземпляра PDO
+ * Регистрация одного экземпляра PDO для работы с БД
  * @see http://php.net/manual/en/class.pdo.php
+ * Также здесь используется замыкание/анонимная функция- функция без имени
+ * @see http://php.net/manual/en/functions.anonymous.php
+ * $app->share() - это регистрация 1го экземпляра сервиса
+ * @see http://silex.sensiolabs.org/doc/services.html#shared-services
  */
-$app['pdo'] = $app->share(function () use ($app) {
+$app['pdo'] = $app->share(function () {
     return new PDO(
         'mysql:host=localhost;dbname=remember-password',
         'root',
