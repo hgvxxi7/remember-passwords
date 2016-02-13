@@ -5,6 +5,7 @@
 {% block jumbotron %}
     <h1>{{ title|e }}</h1>
     <p>{{ description|e }}</p>
+    {# Для создания урла мы обращаемся к роуту по его имени привязанному через bind #}
     <p><a class="btn btn-primary btn-lg" href="{{ path('registration') }}" role="button">Registration</a></p>
     <p><a class="btn btn-default" href="{{ path('login') }}" role="button">Log in</a></p>
 {% endblock %}
