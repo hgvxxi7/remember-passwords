@@ -41,22 +41,43 @@ class UserController
 
     public function loginAction(Request $request, Application $app)
     {
+        $twigVariables = [];
+        $twigVariables['login'] = 0;
+        if ($request->getMethod() == 'POST') {
+            $pdo = $app['pdo'];
+            $stmt = $pdo->prepare('SELECT * FROM users WHERE login = :login and password = MD5(CONCAT(:password , users.salt))');
+            $stmt->bindParam(':login', $request->get('email'));
+            $stmt->bindParam(':password', $request->get('password'));
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            if(count($result) == 1){
+                $twigVariables['login'] = 1;
+            }
+            else {
+                $twigVariables['login'] = 2;
+            }
+        }
+        $twigVariables['title'] = 'Log in form';
+
+        return $app['twig']->render('login.twig', $twigVariables);
+
         /* Добавить запрос SELECT. В запросе изменить условие на login = :login AND password = :password */
     }
 
     public function usersAction(Request $request, Application $app)
     {
+        $twigVariables = [];
         /* @var $pdo \PDO */
         $pdo = $app['pdo'];
         /* SELECT запрос. */
-        /* Сверять пароль нужно закодированный по условию которое описанно в методе регистрации */
         $stmt = $pdo->prepare('SELECT * FROM users');
         $stmt->execute();
         /* Получение результатов от mysql после выполнения SELECT */
         $result = $stmt->fetchAll();
 
-        /* Нужно выводить данные во вью */
-        var_dump($result); die;
+        $twigVariables['result'] = $result;
+
+        return $app['twig']->render('users.twig',$twigVariables);
     }
 
     /**

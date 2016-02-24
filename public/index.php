@@ -45,17 +45,22 @@ $app['pdo'] = $app->share(function () {
 $app->get('/', 'PasswordManager\\Controller\\IndexController::indexAction')
 /* bind привязывает уникальное имя к роуту. Чтобы данный роут можно вызвать из view по имени home. */
     ->bind('home');
+
 /* GET метод для формы регистрации. получение формы */
 $app->get('/registration', 'PasswordManager\\Controller\\UserController::registrationAction')
     ->bind('registration');
 /* POST метод для формы регистрации. обработка полученных данных из формы */
 $app->post('/registration', 'PasswordManager\\Controller\\UserController::registrationAction');
+
 /* GET для страницы логина */
 $app->get('/login', 'PasswordManager\\Controller\\UserController::loginAction')
     ->bind('login');
+$app->post('/login', 'PasswordManager\\Controller\\UserController::loginAction');
+
 /* GET для страницы юзеров */
 $app->get('/users', 'PasswordManager\\Controller\\UserController::usersAction')
     ->bind('users');
+
 /* GET для страницы юзера. Роут с переменной. http://silex.sensiolabs.org/doc/usage.html#route-variables */
 $app->get('/user/{id}', 'PasswordManager\\Controller\\UserController::userAction')
 /* В перменной id разрешаем использование только цыфр */

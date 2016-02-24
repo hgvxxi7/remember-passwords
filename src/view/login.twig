@@ -1,0 +1,48 @@
+{# Подключаем основной темплит http://twig.sensiolabs.org/doc/templates.html#template-inheritance #}
+{% extends "template/basic.twig" %}
+
+{# В блок title добавляем значение #}
+{% block title %}LogIn{% endblock %}
+{# В блок breadcrumbs добавляем значение #}
+{% block breadcrumb %}
+    <li class="active">Log in</li>
+{% endblock %}
+
+{# В блок content добавляем значение #}
+{% block content %}
+    {# Выводим переменную title #}
+    <h1>{{ title }}</h1>
+
+    <hr/>
+    {# Выводим див на 4 колонки http://getbootstrap.com/css/#grid #}
+    <div class="row">
+        <div class="col-md-4">
+            {% if login == 0 %}
+            {%  endif  %}
+            {% if login == 1 %}
+            <div class="alert alert-success" role="alert">
+
+                    <strong>Well done!</strong> You successfully login <a href="{{ path('login') }}" class="alert-link">you can work with your page.</a>.
+                </div>
+            {%  endif  %}
+            {% if login == 2 %}
+                <div class="alert alert-danger" role="alert">
+
+                    <strong>Check the correctness of input your Email address and Password.</strong> Or pass registration  <a href="{{ path('login') }}" class="alert-link"></a>.
+                </div>
+            {%  endif  %}
+            {# Выводим форму http://getbootstrap.com/css/#forms #}
+            <form class="form-login" method="post">
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                </div>
+                <button class="btn btn-primary" type="submit">Log in</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
