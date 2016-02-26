@@ -2,15 +2,17 @@
 
 namespace PasswordManager\Controller;
 
+use PasswordManager\Model\Calculator;
+use PasswordManager\Model\RegistrationModel;
+use PasswordManager\Model\UserModel;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserController
 {
-    /**
+    /*
      * Регистрация пользователя
      * Обработка и отображение формы региастрации и сохранение данных в БД
-     *
      * @param Request $request
      * @param Application $app
      * @return mixed
@@ -19,50 +21,42 @@ class UserController
     {
         $twigVariables = [];
         $twigVariables['registration'] = false;
-
         if ($request->getMethod() == 'POST') {
+            $model = new UserModel();
+            $model->registration($request->get('email'), $request->get('password'), $app['pdo']);
 
-            $salt = md5(microtime());
-            $password = md5($request->get('password').$salt);
-
-            /* @var $pdo \PDO */
-            $pdo = $app['pdo'];
-            $stmt = $pdo->prepare('INSERT INTO users (login, password, salt) VALUES (:login, :password, :salt)');
-            $stmt->bindParam(':login', $request->get('email'));
-            $stmt->bindParam(':password', $password);
-            $stmt->bindParam(':salt', $salt);
-            $stmt->execute();
             $twigVariables['registration'] = true;
         }
-
         $twigVariables['title'] = 'Registration form';
         return $app['twig']->render('registration.twig', $twigVariables);
     }
 
+
+    /**
+     * Метод используеться для logina user
+     * @param Request $request
+     * @param Application $app
+     * @return mixed
+     */
     public function loginAction(Request $request, Application $app)
     {
         $twigVariables = [];
         $twigVariables['login'] = 0;
         if ($request->getMethod() == 'POST') {
-            $pdo = $app['pdo'];
-            $stmt = $pdo->prepare('SELECT * FROM users WHERE login = :login and password = MD5(CONCAT(:password , users.salt))');
-            $stmt->bindParam(':login', $request->get('email'));
-            $stmt->bindParam(':password', $request->get('password'));
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            if(count($result) == 1){
+            $model = new UserModel();
+            $result = $model->login($request->get('email'), $request->get('password'), $app['pdo']);
+            /* if нужен для того-то-) */
+            if (count($result) == 1) {
                 $twigVariables['login'] = 1;
-            }
-            else {
+            } else {
                 $twigVariables['login'] = 2;
             }
         }
         $twigVariables['title'] = 'Log in form';
-
         return $app['twig']->render('login.twig', $twigVariables);
-
-        /* Добавить запрос SELECT. В запросе изменить условие на login = :login AND password = :password */
     }
+    /* Добавить запрос SELECT. В запросе изменить условие на login = :login AND password = :password */
+
 
     public function usersAction(Request $request, Application $app)
     {
@@ -74,11 +68,10 @@ class UserController
         $stmt->execute();
         /* Получение результатов от mysql после выполнения SELECT */
         $result = $stmt->fetchAll();
-
         $twigVariables['result'] = $result;
-
-        return $app['twig']->render('users.twig',$twigVariables);
+        return $app['twig']->render('users.twig', $twigVariables);
     }
+
 
     /**
      * Получение данных для указанного юзера
@@ -89,7 +82,6 @@ class UserController
     {
         /* @var $pdo \PDO */
         $pdo = $app['pdo'];
-
         /* SELECT запрос с простым условием id=:id. */
         $stmt = $pdo->prepare('SELECT * FROM users WHERE id = :id');
         /* Подставляем переменную id из GET параметров */
@@ -98,7 +90,6 @@ class UserController
         $stmt->execute();
         /* Получение 1го результата от mysql после выполнения SELECT */
         $result = $stmt->fetch();
-
         /* Передача данных во вью */
         return $app['twig']->render(
             'user.twig',
