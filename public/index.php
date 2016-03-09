@@ -8,7 +8,8 @@ $filename = __DIR__.preg_replace('#(\?.*)$#', '', $_SERVER['REQUEST_URI']);
 if (php_sapi_name() === 'cli-server' && is_file($filename)) {
     return false;
 }
-
+/*запуск сессии и сохранение сессии*/
+session_start();
 $app = new Silex\Application();
 /**
  * Регистрация twig template engine

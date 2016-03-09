@@ -24,6 +24,11 @@
                     <strong>Well done!</strong> You successfully registered <a href="{{ path('login') }}" class="alert-link">you can login</a>.
                 </div>
             {%  endif  %}
+            {% if userNameValidate == false %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Sorry, the "Email address" field must contain from 6 to 20 characters.</strong>
+                </div>
+            {%  endif  %}
             {# Выводим форму http://getbootstrap.com/css/#forms #}
             <form class="form-registration" method="post">
                 <div class="form-group">
