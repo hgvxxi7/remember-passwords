@@ -13,6 +13,10 @@ class UserController
 
     protected $validate;
 
+    /**
+     * @return UserModel
+     * soliD
+     */
     public function getModel()
     {
         if (!$this->model instanceof UserModel) { //instanceof - проверка элемента model на
@@ -40,12 +44,13 @@ class UserController
         $twigVariables = [];
         $twigVariables['registration'] = false;
         $twigVariables['userNameValidate'] = true;
+        $twigVariables['userPasswordValidate'] = true;
         if ($request->getMethod() == 'POST')
         {
             $validate = $this->characterValidator();
-            //$v = new validate();
             $twigVariables['userNameValidate'] = $validate->characterValidator($request->get('email'),6,20);
-            if ($twigVariables['userNameValidate'] == true)
+            $twigVariables['userPasswordValidate'] = $validate->characterValidator($request->get('password'),3,10);
+            if ($twigVariables['userNameValidate'] == true && $twigVariables['userPasswordValidate'] == true)
             {
                 $model = $this->getModel();
                 $model->registration($request->get('email'), $request->get('password'), $app['pdo']);

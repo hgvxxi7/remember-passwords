@@ -29,6 +29,11 @@
                     <strong>Sorry, the "Email address" field must contain from 6 to 20 characters.</strong>
                 </div>
             {%  endif  %}
+            {% if userPasswordValidate == false %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Sorry, the "Password" field must contain from 3 to 10 characters.</strong>
+                </div>
+            {%  endif  %}
             {# Выводим форму http://getbootstrap.com/css/#forms #}
             <form class="form-registration" method="post">
                 <div class="form-group">
